@@ -24,9 +24,15 @@
 			height: 300px;
 			margin: 0 auto;
 			border: 2px solid red;
+
+      /*
+        Устанавливает режим рендеринга изображения для устранения эффекта блюра.
+        (В таком виде поддерживается как минимум 2 последними версиями браузеров)
+      */
+      image-rendering: crisp-edges;
 		}
 	</style>
-	
+
 	<body>
 		<div class="wrapper">
 			<section class="text">
@@ -44,11 +50,33 @@
 	<script>
 		var canvas = document.querySelector('#canvas');
 		var context = canvas.getContext('2d');
-
 		var image = new Image();
-		image.src = 'border.png';
-		image.onload = function () {
-			context.drawImage(image,0,0);
+		image.src = 'img/border.png';
+
+    /*
+      Устанавливаем высоту canvas'a, равную ширине, предполагая, что они всегда будут иметь заданный
+      в условиях размер. Для реализации подстановки значения из CSS при использовании инлайновых стилей
+      можно добавить поиск регулярным выражением по полю cssText выдачи метода getComputedStyle, но в данном
+      случае я решил не усложнять решение без необходимости.
+    */
+    canvas.height = canvas.width
+
+    /*
+      Смещает начало отрисовки изображения на пол-пикселя дли устранения интерполяции.
+    */
+    context.translate(0.5, 0.5);
+
+    /*
+      Отключает программное сглаживание изображения для устранения эффекта блюра.
+    */
+    context.imageSmoothingEnabled = false;
+
+    image.onload = function () {
+      var aspectRatio = image.width / image.height;
+      var imageWidth = parseInt(canvas.width);
+      var imageHeight = parseInt(canvas.width / aspectRatio);
+
+      context.drawImage(image, 0, 0, imageWidth, imageHeight);
 		};
 	</script>
 </html>
