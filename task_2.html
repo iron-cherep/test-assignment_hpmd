@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
+	</head>
+	<style>
+		body {
+			font-family: 'Roboto', sans-serif;
+		}
+
+		.wrapper {
+			width:1024px;
+			margin: 0 auto;
+		}
+
+		.task {
+			width: 100%;
+		}
+
+		canvas {
+			display: block;
+			width: 300px;
+			height: 300px;
+			margin: 0 auto;
+			border: 2px solid red;
+		}
+	</style>
+	
+	<body>
+		<div class="wrapper">
+			<section class="text">
+				<h2>Задание 2</h2>
+				<p>
+					Тут уже задача посложнее. Нужно нарисовать картинку border.png на canvas-е с сохранением пропорций и качества.<br>
+					Размер canvas-а оставить неизменным (300х300).( ͡° ͜ʖ ͡°)
+			</section>
+			<section class="task task2">
+				<canvas id='canvas'></canvas>
+			</section>
+		</div>
+	</body>
+
+	<script>
+		var canvas = document.querySelector('#canvas');
+		var context = canvas.getContext('2d');
+
+		var image = new Image();
+		image.src = 'border.png';
+		image.onload = function () {
+			context.drawImage(image,0,0);
+		};
+	</script>
+</html>
