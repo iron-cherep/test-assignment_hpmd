@@ -8,14 +8,24 @@
 		body {
 			font-family: 'Roboto', sans-serif;
 		}
-
 		.wrapper {
 			width:1024px;
 			margin: 0 auto;
 		}
-
+    .text__comments {
+      margin-top: 2em;
+    }
+    .text__function-name {
+      font-weight: bolder;
+    }
+    .text__after {
+      font-size: 0.8em;
+    }
+    .text__answer {
+      color: green;
+    }
 	</style>
-	
+
 	<body>
 		<div class="wrapper">
 			<section class="text">
@@ -24,11 +34,29 @@
 					Финишная прямая. Нужно написать метод массива, который оставляет в массиве только уникальные элементы.<br>
 					arr.unic(); ['1', '2', '1', 'js', 'css', 'js'] --> ['1', '2', 'js', 'css'] ( ಥ ʖ̯ ಥ)
 				</p>
+        <p class="text__comments">
+          Для демонстрации выполнения функции ввести в консоли <span class="text__function-name">returnUnique(test)</span><br>
+          <span class="text__after">*вместо test можно использовать любой массив.</span>
+        </p>
+        <p class="text__answer" id="text__answer"></p>
 			</section>
 		</div>
 	</body>
 
 	<script>
-		
+  /*
+    Создаём кастомную функцию фильтрации, которая не добавляет элемент в новый массив,
+    если первый идентичный элемент исходного массива имеет отличный индекс
+    (т.е. если элемент, проходящий через функцию - повторяющийся)
+  */
+  var test = ['1', '2', '1', 'js', 'css', 'js'];
+
+  function returnUnique(array) {
+    unique =  array.filter(function(element, i, arr) {
+      return i == arr.indexOf(element);
+    });
+    console.log(unique);
+    document.getElementById("text__answer").textContent = unique;
+  }
 	</script>
 </html>
